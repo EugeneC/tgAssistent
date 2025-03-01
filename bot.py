@@ -8,6 +8,10 @@ API_HASH = os.getenv("API_HASH")
 SESSION_STRING = os.getenv("SESSION_STRING")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 
+if os.getenv("DISABLE_BOT") == "true":
+    print("Bot is disabled. Exiting...")
+    exit()
+
 client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
 
 @client.on(events.NewMessage(chats=CHANNEL_USERNAME))
