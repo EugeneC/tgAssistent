@@ -2,13 +2,12 @@ import os
 import asyncio
 from telethon import TelegramClient, events
 
-# Fetch environment variables from Railway
-API_ID = int(os.getenv("API_ID"))  
-API_HASH = os.getenv("API_HASH")  
+API_ID = int(os.getenv("API_ID"))
+API_HASH = os.getenv("API_HASH")
+SESSION_STRING = os.getenv("SESSION_STRING")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 
-# Create Telegram Client
-client = TelegramClient("session", API_ID, API_HASH)
+client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
 
 @client.on(events.NewMessage(chats=CHANNEL_USERNAME))
 async def new_message_handler(event):
@@ -19,5 +18,4 @@ async def main():
     await client.start()
     await client.run_until_disconnected()
 
-# Run bot
 asyncio.run(main())
